@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages {
+        stage('Test webhook...') {
+            steps{
+                echo 'Webhook working...'
+            }
+        }
         stage('Login to DockerHub') {
             steps{
                 echo 'Logging in to DockerHub...'
