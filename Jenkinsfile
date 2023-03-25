@@ -2,14 +2,14 @@ pipeline {
     agent any
     stages {
         stage('Test webhook...') {
-            steps{
+            steps {
                 echo 'Webhook working...'
             }
         }
         stage('Login to DockerHub') {
-            steps{
+            steps {
                 echo 'Logging in to DockerHub...'
-                withCredentials([usernamePassword(credentialsId: dockerhub-credentials, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
                 }
             }
@@ -22,8 +22,10 @@ pipeline {
         }
         stage('Push Docker image to DockerHub repo')
         {
-            echo "Pushing Docker image to DockerHub repo..."
-            sh 'docker push v8engine/react-nodejs-example'
+            steps {
+                echo "Pushing Docker image to DockerHub repo..."
+                sh 'docker push v8engine/react-nodejs-example'
+            }
         }
     }
 }
