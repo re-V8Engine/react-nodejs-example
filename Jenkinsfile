@@ -24,7 +24,7 @@ pipeline {
         {
             steps {
                 echo "Pushing Docker image to DockerHub repo..."
-                sh 'docker push v8engine/react-nodejs-example'
+                sh 'docker push v8engine/react-nodejs-example:1.0'
             }
         }
     }
